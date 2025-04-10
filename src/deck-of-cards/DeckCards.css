@@ -1,0 +1,109 @@
+.deck-container {
+  position: absolute;
+  width: 200px;
+  height: 290px;
+  perspective: 800px;
+}
+
+.deck-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-origin: bottom left;
+  animation: deck-flip-rotate 5s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+
+.card-info {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+}
+
+.deck-card-face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden; 
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.deck-card-placement {
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+
+  > div:nth-child(1) {
+    align-self: self-start;
+  }
+
+  > div:nth-child(2) {
+    transform: scale(3);
+  }
+
+  > div:nth-child(3) {
+    align-self: self-end;
+    transform: rotate(180deg);
+  }
+}
+
+.deck-front-empty {
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  background-color:var(--card-background-color);
+  background-image: var(--card-background-image);
+  background-size:5vmin 5vmin;
+  background-position:0 0, 2.5vmin 2.5vmin;
+  border: solid 10px #fff;
+}
+
+/* Back side of the card */
+.deck-card-back {
+  position: relative;
+  background-color: #fff;
+}
+
+.king-of-hearts {
+  --from-deg: 0deg;
+  --to-deg: -50deg;
+}
+
+.king-of-clubs {
+  --from-deg: 0deg;
+  --to-deg: -30deg;
+}
+
+.ace-of-spades {
+  --from-deg: 0deg;
+  --to-deg: -10deg;
+}
+
+.ace-of-clubs {
+  --from-deg: 0deg;
+  --to-deg: 10deg;
+}
+.ace-of-diamonds {
+  --from-deg: 0deg;
+  --to-deg: 30deg;
+}
+
+@keyframes deck-flip-rotate {
+  0% {
+    transform: rotate(var(--from-deg));
+  }
+  30%,
+  70% {
+    transform: rotate(var(--to-deg));
+  }
+  90%,
+  0% {
+    transform: rotate(var(--from-deg));
+  }
+}

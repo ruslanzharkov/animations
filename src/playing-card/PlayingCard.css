@@ -1,0 +1,89 @@
+.container {
+  position: relative; /* Ensure z-index works */
+  width: 200px;
+  height: 290px;
+  perspective: 800px;
+  z-index: 0;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d; /* Keeping the 3D space */
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Flip card animation */
+  transform-origin: center; /* Centering the rotation point */
+}
+
+.card-common {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden; 
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-info {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+}
+
+.card-placement {
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+
+  > div:nth-child(1) {
+    align-self: self-start;
+  }
+
+  > div:nth-child(2) {
+    transform: scale(3);
+  }
+
+  > div:nth-child(3) {
+    align-self: self-end;
+    transform: rotate(180deg);
+  }
+}
+
+.back-uniform {
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  background-color:var(--card-background-color);
+  background-image: var(--card-background-image);
+  border: solid 10px #fff;
+}
+
+.card-front {
+  position: relative;
+  background-color: #fff;
+  transform: rotateY(180deg);
+}
+
+.container.back > .card {
+  transform: rotateY(0deg);
+}
+
+.container.front > .card {
+  transform: rotateY(180deg);
+}
+
+.container.back.flip-enabled:hover > .card {
+  transform: rotateY(180deg);
+  cursor: pointer;
+}
+
+.container.front.flip-enabled:hover > .card {
+  transform: rotateY(0deg);
+  cursor: pointer;
+}
